@@ -14,14 +14,27 @@ class Solution:
             freq_s1[i] += 1
 
         for i, ch in enumerate(s2):
-            if ch in Freq_:
+            if ch in freq_s1:
+                freq_s2[ch] += 1
+                window = i-st+1
+                if window == n:
+                    isContain = True
+                    for i,val in freq_s1.items():
+                        if freq_s2[i] < freq_s1[i]:
+                            isContain = False
+                            break
 
+                    if isContain:
+                        return True
 
-        for i, val in freq_s1.items():
-            if freq_s2[i] < freq_s1[i]:
-                return False
-
-        return True
-
+                    freq_s2[s2[st]] -= 1
+                    st += 1
+            else:
+                st = i+1
+                freq_s2 = defaultdict(int)
+        
+        return False
+        
+        
 
         
